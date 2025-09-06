@@ -5,6 +5,7 @@ import logoIcon from "../assets/images/Logo.png";
 import iconFacebook from "../assets/images/IconFacebook.png";
 import iconInstagram from "../assets/images/IconInstagram.png";
 import iconLinkedin from "../assets/images/IconLinkedin.png";
+import whatsappIcon from "../assets/images/whatsapp-icon.png"; // Importa tu icono aquí
 
 const Home = () => {
   const navigate = useNavigate();
@@ -17,9 +18,21 @@ const Home = () => {
       <header className="flex justify-between items-start px-8 md:px-16 pt-6 pb-4 w-full">
         <img src={logoIcon} alt="Logo" className="w-64 md:w-80 h-auto" />
         <div className="flex items-start mt-2 gap-4 md:gap-6">
-          <img src={iconFacebook} alt="Facebook" className="w-10 h-10 md:w-12 md:h-12" />
-          <img src={iconInstagram} alt="Instagram" className="w-10 h-10 md:w-12 md:h-12" />
-          <img src={iconLinkedin} alt="LinkedIn" className="w-10 h-10 md:w-12 md:h-12" />
+          <img
+            src={iconFacebook}
+            alt="Facebook"
+            className="w-10 h-10 md:w-12 md:h-12"
+          />
+          <img
+            src={iconInstagram}
+            alt="Instagram"
+            className="w-10 h-10 md:w-12 md:h-12"
+          />
+          <img
+            src={iconLinkedin}
+            alt="LinkedIn"
+            className="w-10 h-10 md:w-12 md:h-12"
+          />
         </div>
       </header>
 
@@ -30,7 +43,9 @@ const Home = () => {
           </h1>
 
           <p className="text-xl md:text-2xl text-white font-nunito">
-            En DesignMark Pro, te ofrecemos una solución integral para personalizar y organizar paquetes de servicios de diseño, desarrollo web y publicidad en redes sociales.
+            En DesignMark Pro, te ofrecemos una solución integral para
+            personalizar y organizar paquetes de servicios de diseño, desarrollo
+            web y publicidad en redes sociales.
           </p>
 
           <button
@@ -41,6 +56,15 @@ const Home = () => {
           </button>
         </div>
       </main>
+
+      <a
+        href="https://wa.me/573001234567?text=Hola,%20quiero%20más%20información"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-8 right-8 bg-[#25D366] hover:bg-green-600 text-white rounded-full w-20 h-20 flex items-center justify-center shadow-lg z-50"
+      >
+        <img src={whatsappIcon} alt="WhatsApp" className="w-12 h-12" />
+      </a>
     </div>
   );
 };
