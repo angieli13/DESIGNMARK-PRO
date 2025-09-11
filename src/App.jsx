@@ -7,13 +7,14 @@ import Services from './components/Services.jsx';
 import WhatWeDo from './components/WhatWeDo.jsx';
 import CalendlyPage from './components/CalendlyPage.jsx';
 import PackagesPage from './components/PackagesPage.jsx'; 
+import LoginPage from './components/LoginPage.jsx'; 
 import './styles/App.css';
 
 function App() {
   return (
     <Router>
       <Routes>
-        
+        {/* Home */}
         <Route path="/" element={
           <>
             <Home />
@@ -25,11 +26,14 @@ function App() {
           </>
         }/>
 
-        
+        {/* Calendly */}
         <Route path="/calendly" element={<CalendlyPage />} />
 
-       
+        {/* Paquetes */}
         <Route path="/packages" element={<PackagesPage />} />
+
+        {/* Login */}
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </Router>
   );

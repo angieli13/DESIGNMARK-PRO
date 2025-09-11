@@ -5,7 +5,7 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 
 export default [
   { ignores: ['dist'] },
-  {
+    {
     files: ['**/*.{js,jsx}'],
     languageOptions: {
       ecmaVersion: 2020,
@@ -15,7 +15,7 @@ export default [
         ecmaFeatures: { jsx: true },
         sourceType: 'module',
       },
-    },
+           },
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
@@ -28,6 +28,19 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+    },
+  },
+{
+    files: ['server/**/*.js'],  // 👈 aplica solo a tu carpeta server
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: {
+        ...globals.node,       // 👈 ahora reconoce process, __dirname, etc.
+      },
+      sourceType: 'module',
+    },
+    rules: {
+      ...js.configs.recommended.rules,
     },
   },
 ]

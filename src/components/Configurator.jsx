@@ -25,7 +25,7 @@ const Configurator = () => {
               backgroundColor: "#FFBC57",
               fontFamily: "F37 Finger, sans-serif",
             }}
-            onClick={() => navigate("/packages")} 
+            onClick={() => navigate("/login")} 
           >
             Ármalo tú mismo
           </button>
