@@ -202,7 +202,12 @@ Este proyecto fue desarrollado con fines educativos y de práctica profesional.
 [mysql-url]: https://www.mysql.com/
 [vite-url]: https://vite.dev/
 [github-url]: https://github.com/
-
+[react-badge]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[tailwind-badge]: https://img.shields.io/badge/Tailwind_CSS-38BDF8?style=for-the-badge&logo=tailwindcss&logoColor=white
+[node-badge]: https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white
+[mysql-badge]: https://img.shields.io/badge/MySQL-00758F?style=for-the-badge&logo=mysql&logoColor=white
+[vite-badge]: https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=FFD62E
+[github-badge]: https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white
 
 <!-- Tech Stack Links -->
 
