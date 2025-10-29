@@ -1,6 +1,4 @@
 ![head](src/assets/images/DMark.gif)
-<div align="center"> 
-
 ---
 
 ## 📎 Descripción
@@ -30,6 +28,8 @@ Fue desarrollado aplicando **metodologías ágiles (SCRUM)**, con **Jira** para 
 - 🧾 <a href="#readme-license" title="Ir a la Licencia">Licencia</a>
 
 </details>
+
+<a name="readme-stack"></a>
 ---
 
 ## 🚀 Tech Stack
@@ -43,10 +43,11 @@ Fue desarrollado aplicando **metodologías ágiles (SCRUM)**, con **Jira** para 
 
 
 
-<p align="right">
-    
+<p align="right">    
     (<strong><a href="#readme-index">índice</a></strong>)
 </p>
+
+<a name="readme-install"></a>
 ---
 
 ## ⚙️ Instalación y ejecución
@@ -55,16 +56,19 @@ Fue desarrollado aplicando **metodologías ágiles (SCRUM)**, con **Jira** para 
 ```bash
 git clone https://github.com/angieli13/DESIGNMARK-PRO.git
 cd DESIGNMARK-PRO
+
 2️⃣ Instalar dependencias
 
 bash
 Copiar código
 npm install
+
 3️⃣ Ejecutar el servidor (backend)
 
 bash
 Copiar código
 npm run server
+
 4️⃣ Ejecutar el cliente (frontend)
 
 bash
@@ -74,13 +78,15 @@ El cliente corre en: http://localhost:5173
 El servidor API corre en: http://localhost:5000
 
 
-<p align="right">
-    
+<p align="right">    
     (<strong><a href="#readme-index">índice</a></strong>)
 </p>
+
+<a name="readme-jira"></a>
 ---
 
-## 📋 Tablero Jira - Fases del proyecto
+## 📋 Tablero Jira
+
 El progreso de DesignMark Pro fue gestionado con la metodología SCRUM usando Jira Software.
 Se documentaron las fases de planificación, diseño, desarrollo, pruebas y entrega.
 
@@ -88,13 +94,16 @@ Se documentaron las fases de planificación, diseño, desarrollo, pruebas y entr
 👉 Ver tablero del proyecto en Jira
 
 
-<p align="right">
-    
+<p align="right">    
     (<strong><a href="#readme-index">índice</a></strong>)
 </p>
+
+<a name="readme-figma"></a>
+
 ---
 
 ## 🎨 Prototipo en Figma
+
 El diseño UI/UX fue creado en Figma, definiendo la estructura visual, paleta de colores, tipografías y componentes principales antes del desarrollo.
 
 📌 Ver el prototipo aquí:
@@ -102,20 +111,25 @@ El diseño UI/UX fue creado en Figma, definiendo la estructura visual, paleta de
 
 <p align="center"> <img src="src/assets/images/FIGMA.png" alt="Prototipo Figma DesignMark Pro" width="600"> </p> 
 
-<p align="right">
-    
+<p align="right">    
     (<strong><a href="#readme-index">índice</a></strong>)
 </p>
+
+<a name="readme-domain"></a>
+
 ---
 
 ## 🧩 Diagrama del modelo de dominio
 El siguiente diagrama representa las entidades principales del sistema: Usuarios, Servicios, Paquetes y Reuniones, así como sus relaciones dentro de la base de datos.
 
 <p align="center"> <img src="src/assets/images/grafica.png" alt="Diagrama del modelo de dominio" width="650"> </p> 
-<p align="right">
-    
+
+<p align="right">    
     (<strong><a href="#readme-index">índice</a></strong>)
 </p>
+
+<a name="readme-structure"></a>
+
 ---
 
 ## 🗃️ Estructura del proyecto
@@ -169,10 +183,11 @@ src/Styles/ → Estilos globales en Tailwind.
 vite.config.js → Configuración del entorno.
 
 
-<p align="right">
-    
+<p align="right">    
     (<strong><a href="#readme-index">índice</a></strong>)
 </p>
+
+<a name="readme-contact"></a>
 ---
 
 ##👩‍💻 Contacto
@@ -183,10 +198,11 @@ Desarrolladora Frontend & UX/UI Designer
 💼 LinkedIn - Angie Combita
 
 <p align="center"> <img src="src/assets/images/ImagenPrincipal.svg" alt="Vista previa DesignMark Pro" width="600"> </p> 
-<p align="right">
-    
+<p align="right">    
     (<strong><a href="#readme-index">índice</a></strong>)
 </p>
+
+<a name="readme-license"></a>
 ---
 
 ## 🧾 Licencia
