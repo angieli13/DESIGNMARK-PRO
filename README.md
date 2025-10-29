@@ -31,7 +31,7 @@ Fue desarrollado aplicando **metodologías ágiles (SCRUM)**, con **Jira** para 
 
 </details>
 
-<a name="readme-stack"></a>
+<a name="readme-stack">Nombre</a>
 
 ---
 
@@ -63,21 +63,22 @@ cd DESIGNMARK-PRO
 
 2️⃣ Instalar dependencias
 
-```bash
+bash
 Copiar código
 npm install
 
 3️⃣ Ejecutar el servidor (backend)
 
-```bash
+bash
 Copiar código
 npm run server
 
 4️⃣ Ejecutar el cliente (frontend)
 
-```bash
+bash
 Copiar código
 npm run dev
+```
 
 El cliente corre en: http://localhost:5173
 El servidor API corre en: http://localhost:5000
