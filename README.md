@@ -141,8 +141,9 @@ El siguiente diagrama representa las entidades principales del sistema: Usuarios
 ## 🗃️ Estructura del proyecto
 La arquitectura de DesignMark Pro está dividida en backend, frontend y recursos compartidos para mantener orden y escalabilidad.
 
-bash
-Copiar código
+
+
+```bash
 DESIGNMARK-PRO/
 │
 ├── public/
@@ -174,38 +175,31 @@ DESIGNMARK-PRO/
 ├── tailwind.config.js
 ├── vite.config.js
 └── README.md
-📘 Descripción breve:
+```
 
-server/ → Conexión MySQL y lógica del backend.
+📘 **Descripción breve:**
+- **server/** → Conexión MySQL y lógica del backend.  
+- **src/components/** → Componentes de interfaz React.  
+- **src/assets/** → Imágenes y recursos gráficos.  
+- **src/Styles/** → Estilos globales en Tailwind.  
+- **.env** → Variables de entorno.  
+- **vite.config.js** → Configuración del entorno.
 
-src/components/ → Componentes de interfaz React.
-
-src/assets/ → Imágenes y recursos gráficos.
-
-src/Styles/ → Estilos globales en Tailwind.
-
-.env → Variables de entorno.
-
-vite.config.js → Configuración del entorno.
-
-
-<p align="right">    
-    (<strong><a href="#readme-index">índice</a></strong>)
-</p>
+<p align="right"> (<strong><a href="#readme-index">índice</a></strong>) </p>
 
 <a name="readme-contact"></a>
 ---
 
-##👩‍💻 Contacto
-Angie Martínez
-Desarrolladora Frontend & UX/UI Designer
-📧 angiequimica13@gmail.com
-🌐 GitHub - angieli13
-💼 LinkedIn - Angie Combita
+## 👩‍💻 Contacto
+**Angie Cómbita Martínez**  
+Desarrolladora Frontend & UX/UI Designer  
+📧 **angiequimica13@gmail.com**  
+🌐 **GitHub:** [angieli13](https://github.com/angieli13)  
+💼 **LinkedIn:** [Angie Combita](https://www.linkedin.com/in/angie-combita/)
 
-<p align="center"> <img src="src/assets/images/ImagenPrincipal.svg" alt="Vista previa DesignMark Pro" width="600"> </p> 
-<p align="right">    
-    (<strong><a href="#readme-index">índice</a></strong>)
+
+ <p align="right">
+ (<strong><a href="#readme-index">índice</a></strong>)
 </p>
 
 <a name="readme-license"></a>
