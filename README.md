@@ -31,7 +31,7 @@ Fue desarrollado aplicando **metodologías ágiles (SCRUM)**, con **Jira** para 
 
 </details>
 
-<a name="readme-stack">Nombre</a>
+<a name="readme-stack"></a>
 
 ---
 
