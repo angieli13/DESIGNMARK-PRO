@@ -26,6 +26,7 @@ Fue desarrollado aplicando **metodologías ágiles (SCRUM)**, con **Jira** para 
 - 🎨 <a href="#readme-figma" title="Ir al Prototipo en Figma">Prototipo en Figma</a>
 - 🧩 <a href="#readme-domain" title="Ir al Diagrama de Dominio">Diagrama del modelo de dominio</a>
 - 🗃️ <a href="#readme-structure" title="Ir a la Estructura del Proyecto">Estructura del proyecto</a>
+- 🧠 <a href="#readme-back" title="Ir a las  Funcionalidades del Backend">Funcionalidades del Backend</a>
 - 👩‍💻 <a href="#readme-contact" title="Ir al Contacto">Contacto</a>
 - 🧾 <a href="#readme-license" title="Ir a la Licencia">Licencia</a>
 
@@ -187,6 +188,30 @@ DESIGNMARK-PRO/
 
 <p align="right"> (<strong><a href="#readme-index">índice</a></strong>) </p>
 
+<a name="readme-back"></a>
+---
+
+## 🧠 Funcionalidades del Backend
+
+El backend de **DesignMark Pro** fue desarrollado con **Node.js**, **Express.js** y **MySQL**, estructurado bajo una arquitectura RESTful.  
+Integra tres funcionalidades principales que permiten la gestión de usuarios, la cotización de servicios y la programación de reuniones, garantizando una experiencia completa e interactiva para el usuario.
+
+| # | Funcionalidad | Descripción | Endpoints principales |
+|---|----------------|-------------|------------------------|
+| **1** | **Autenticación de usuarios (Registro / Inicio / Cierre de sesión)** | Permite a los usuarios crear una cuenta, iniciar sesión y cerrar sesión. Las contraseñas se almacenan encriptadas para mayor seguridad. | `POST /register` → Registrar usuario<br>`POST /login` → Iniciar sesión<br>`POST /logout` → Cerrar sesión |
+| **2** | **Cotizador de servicios con guardado** | Calcula el precio total de los servicios seleccionados por el usuario y guarda la cotización en la base de datos, permitiendo consultar el historial de cotizaciones. | `POST /cotizacion` → Guardar cotización<br>`GET /cotizaciones/:usuarioId` → Ver cotizaciones del usuario |
+| **3** | **Agenda de reuniones (Calendario)** | Gestiona la programación de reuniones virtuales entre los usuarios y el equipo de DesignMark Pro. Permite registrar, listar y eliminar citas. | `POST /citas` → Crear cita<br>`GET /citas/:usuarioId` → Consultar citas del usuario<br>`DELETE /citas/:id` → Cancelar cita |
+
+### 💾 Conexión y seguridad
+- La conexión a la base de datos se realiza mediante **MySQL2**.  
+- Las contraseñas de usuario se encriptan con **bcrypt**.  
+- El manejo de sesiones se realiza mediante **JSON Web Tokens (JWT)**.  
+- Todos los endpoints fueron probados con **Postman**.
+
+<p align="right">    
+    (<strong><a href="#readme-index">índice</a></strong>)
+</p>
+
 <a name="readme-contact"></a>
 ---
 
@@ -226,4 +251,3 @@ Este proyecto fue desarrollado con fines educativos y de práctica profesional.
 [github-badge]: https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white
 
 <!-- Tech Stack Links -->
-
