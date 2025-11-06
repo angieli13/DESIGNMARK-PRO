@@ -30,7 +30,7 @@
 
 ## 📎 Descripción
 
-**DesignMark Pro** es una aplicación web desarrollada con **React.js**, **Tailwind CSS**, **Node.js** y **MySQL**, enfocada en la creación y personalización de paquetes de servicios de diseño y marketing digital.  
+**DesignMark Pro** es una aplicación web desarrollada con **React.js**, **Tailwind CSS**, **Node.js** y **MySQL**, enfocada en la creación y personalización de paquetes de servicios de diseño, sitios web y marketing digital.  
 Permite a los usuarios **registrarse, iniciar sesión, seleccionar servicios, generar cotizaciones y agendar reuniones virtuales**.  
 
 El proyecto combina una **interfaz moderna y responsive** con una base de datos MySQL conectada mediante Express, logrando una arquitectura escalable y eficiente.  
@@ -317,3 +317,4 @@ Este proyecto fue desarrollado con fines educativos y de práctica profesional.
 <!-- Tech Stack Links -->
 
 >>>>>>> main
+
