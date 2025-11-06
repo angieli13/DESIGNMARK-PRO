@@ -1,60 +1,19 @@
 ![head](src/assets/images/DMark.gif)
-<<<<<<< HEAD
-<div align="center"> 
-<strong><h1>✨ DesignMark Pro ✨</h1></strong>
-
-<a name="readme-top"></a>
-
-[![React][react-badge]][react-url]
-[![Tailwind][tailwind-badge]][tailwind-url]
-[![NodeJS][node-badge]][node-url]
-[![MySQL][mysql-badge]][mysql-url]
-[![Vite][vite-badge]][vite-url]
-[![GitHub][github-badge]][github-url]
-
-<br><br>
-
-<a href="https://github.com/angieli13/DESIGNMARK-PRO" target="_blank" rel="noopener noreferrer">
-  <img width="300px" height="auto" src="src/assets/images/Logo.png" alt="Logo DesignMark Pro" />
-</a>
-
-<br><br>
-
-<img src="src/assets/images/DMark.gif" width="600" alt="Animación DesignMark Pro"/>
-
-</div>
-
-=======
->>>>>>> main
 ---
 
 ## 📎 Descripción
 
-**DesignMark Pro** es una aplicación web desarrollada con **React.js**, **Tailwind CSS**, **Node.js** y **MySQL**, enfocada en la creación y personalización de paquetes de servicios de diseño, sitios web y marketing digital.  
+**DesignMark Pro** es una aplicación web desarrollada con **React.js**, **Tailwind CSS**, **Node.js** y **MySQL**, enfocada en la creación y personalización de paquetes de servicios de diseño y marketing digital.  
 Permite a los usuarios **registrarse, iniciar sesión, seleccionar servicios, generar cotizaciones y agendar reuniones virtuales**.  
 
 El proyecto combina una **interfaz moderna y responsive** con una base de datos MySQL conectada mediante Express, logrando una arquitectura escalable y eficiente.  
 Fue desarrollado aplicando **metodologías ágiles (SCRUM)**, con **Jira** para la gestión de tareas y **Figma** para el prototipo visual.
-<<<<<<< HEAD
-=======
 
 <a name="readme-index"></a>
->>>>>>> main
 
 ---
 
 ## 🗂️ Índice
-<<<<<<< HEAD
-
-- [🚀 Tech Stack](#-tech-stack)
-- [⚙️ Instalación y ejecución](#-instalación-y-ejecución)
-- [📋 Tablero Jira - Fases del proyecto](#-tablero-jira---fases-del-proyecto)
-- [🎨 Prototipo en Figma](#-prototipo-en-figma)
-- [🧩 Diagrama del modelo de dominio](#-diagrama-del-modelo-de-dominio)
-- [🗃️ Estructura del proyecto](#-estructura-del-proyecto)
-- [👩‍💻 Contacto](#-contacto)
-- [🧾 Licencia](#-licencia)
-=======
 <details open>
     <summary>
         <a href="#readme-index" title="Más...">✨ DesignMark Pro ✨</a>
@@ -67,13 +26,13 @@ Fue desarrollado aplicando **metodologías ágiles (SCRUM)**, con **Jira** para 
 - 🎨 <a href="#readme-figma" title="Ir al Prototipo en Figma">Prototipo en Figma</a>
 - 🧩 <a href="#readme-domain" title="Ir al Diagrama de Dominio">Diagrama del modelo de dominio</a>
 - 🗃️ <a href="#readme-structure" title="Ir a la Estructura del Proyecto">Estructura del proyecto</a>
+- 🧠 <a href="#readme-back" title="Ir a las  Funcionalidades del Backend">Funcionalidades del Backend</a>
 - 👩‍💻 <a href="#readme-contact" title="Ir al Contacto">Contacto</a>
 - 🧾 <a href="#readme-license" title="Ir a la Licencia">Licencia</a>
 
 </details>
 
 <a name="readme-stack"></a>
->>>>>>> main
 
 ---
 
@@ -86,9 +45,6 @@ Fue desarrollado aplicando **metodologías ágiles (SCRUM)**, con **Jira** para 
 - [![Vite][vite-badge]][vite-url] → Entorno de desarrollo rápido.  
 - [![GitHub][github-badge]][github-url] → Control de versiones y despliegue.  
 
-<<<<<<< HEAD
-<p align="right">(<a href="#readme-top">🔝 Volver al inicio</a>)</p>
-=======
 
 
 <p align="right">    
@@ -96,7 +52,6 @@ Fue desarrollado aplicando **metodologías ágiles (SCRUM)**, con **Jira** para 
 </p>
 
 <a name="readme-install"></a>
->>>>>>> main
 
 ---
 
@@ -124,32 +79,6 @@ npm run server
 bash
 Copiar código
 npm run dev
-<<<<<<< HEAD
-El cliente corre en: http://localhost:5173
-El servidor API corre en: http://localhost:5000
-
-<p align="right">(<a href="#readme-top">🔝 Volver al inicio</a>)</p>
-📋 Tablero Jira - Fases del proyecto
-El progreso de DesignMark Pro fue gestionado con la metodología SCRUM usando Jira Software.
-Se documentaron las fases de planificación, diseño, desarrollo, pruebas y entrega.
-
-📌 Accede al tablero aquí:
-👉 Ver tablero del proyecto en Jira
-
-<p align="right">(<a href="#readme-top">🔝 Volver al inicio</a>)</p>
-🎨 Prototipo en Figma
-El diseño UI/UX fue creado en Figma, definiendo la estructura visual, paleta de colores, tipografías y componentes principales antes del desarrollo.
-
-📌 Ver el prototipo aquí:
-👉 Prototipo Figma - DesignMark Pro
-
-<p align="center"> <img src="src/assets/images/FIGMA.png" alt="Prototipo Figma DesignMark Pro" width="600"> </p> <p align="right">(<a href="#readme-top">🔝 Volver al inicio</a>)</p>
-🧩 Diagrama del modelo de dominio
-El siguiente diagrama representa las entidades principales del sistema: Usuarios, Servicios, Paquetes y Reuniones, así como sus relaciones dentro de la base de datos.
-
-<p align="center"> <img src="src/assets/images/grafica.png" alt="Diagrama del modelo de dominio" width="650"> </p> <p align="right">(<a href="#readme-top">🔝 Volver al inicio</a>)</p>
-🗃️ Estructura del proyecto
-=======
 ```
 
 El cliente corre en: http://localhost:5173
@@ -211,7 +140,6 @@ El siguiente diagrama representa las entidades principales del sistema: Usuarios
 ---
 
 ## 🗃️ Estructura del proyecto
->>>>>>> main
 La arquitectura de DesignMark Pro está dividida en backend, frontend y recursos compartidos para mantener orden y escalabilidad.
 
 
@@ -260,6 +188,30 @@ DESIGNMARK-PRO/
 
 <p align="right"> (<strong><a href="#readme-index">índice</a></strong>) </p>
 
+<a name="readme-back"></a>
+---
+
+## 🧠 Funcionalidades del Backend
+
+El backend de **DesignMark Pro** fue desarrollado con **Node.js**, **Express.js** y **MySQL**, estructurado bajo una arquitectura RESTful.  
+Integra tres funcionalidades principales que permiten la gestión de usuarios, la cotización de servicios y la programación de reuniones, garantizando una experiencia completa e interactiva para el usuario.
+
+| # | Funcionalidad | Descripción | Endpoints principales |
+|---|----------------|-------------|------------------------|
+| **1** | **Autenticación de usuarios (Registro / Inicio / Cierre de sesión)** | Permite a los usuarios crear una cuenta, iniciar sesión y cerrar sesión. Las contraseñas se almacenan encriptadas para mayor seguridad. | `POST /register` → Registrar usuario<br>`POST /login` → Iniciar sesión<br>`POST /logout` → Cerrar sesión |
+| **2** | **Cotizador de servicios con guardado** | Calcula el precio total de los servicios seleccionados por el usuario y guarda la cotización en la base de datos, permitiendo consultar el historial de cotizaciones. | `POST /cotizacion` → Guardar cotización<br>`GET /cotizaciones/:usuarioId` → Ver cotizaciones del usuario |
+| **3** | **Agenda de reuniones (Calendario)** | Gestiona la programación de reuniones virtuales entre los usuarios y el equipo de DesignMark Pro. Permite registrar, listar y eliminar citas. | `POST /citas` → Crear cita<br>`GET /citas/:usuarioId` → Consultar citas del usuario<br>`DELETE /citas/:id` → Cancelar cita |
+
+### 💾 Conexión y seguridad
+- La conexión a la base de datos se realiza mediante **MySQL2**.  
+- Las contraseñas de usuario se encriptan con **bcrypt**.  
+- El manejo de sesiones se realiza mediante **JSON Web Tokens (JWT)**.  
+- Todos los endpoints fueron probados con **Postman**.
+
+<p align="right">    
+    (<strong><a href="#readme-index">índice</a></strong>)
+</p>
+
 <a name="readme-contact"></a>
 ---
 
@@ -271,22 +223,6 @@ Desarrolladora Frontend & UX/UI Designer
 💼 **LinkedIn:** [Angie Combita](https://www.linkedin.com/in/angie-combita/)
 
 
-<<<<<<< HEAD
-vite.config.js → Configuración del entorno.
-
-<p align="right">(<a href="#readme-top">🔝 Volver al inicio</a>)</p>
-👩‍💻 Contacto
-Angie Martínez
-Desarrolladora Frontend & UX/UI Designer
-📧 angiequimica13@gmail.com
-🌐 GitHub - angieli13
-💼 LinkedIn - Angie Combita
-
-<p align="center"> <img src="src/assets/images/ImagenPrincipal.svg" alt="Vista previa DesignMark Pro" width="600"> </p> <p align="right">(<a href="#readme-top">🔝 Volver al inicio</a>)</p>
-🧾 Licencia
-Este proyecto fue desarrollado con fines educativos y de práctica profesional.
-© 2025 DesignMark Pro – Todos los derechos reservados.
-=======
  <p align="right">
  (<strong><a href="#readme-index">índice</a></strong>)
 </p>
@@ -315,6 +251,3 @@ Este proyecto fue desarrollado con fines educativos y de práctica profesional.
 [github-badge]: https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white
 
 <!-- Tech Stack Links -->
-
->>>>>>> main
-
