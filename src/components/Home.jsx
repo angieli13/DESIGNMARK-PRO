@@ -49,7 +49,11 @@ const Home = () => {
           </p>
 
           <button
-            onClick={() => navigate("/calendly")}
+            onClick={() => {
+              localStorage.removeItem("selectedPackage"); // limpia si existía
+              localStorage.setItem("visitSource", "home");
+              navigate("/calendly");
+            }}
             className="px-10 py-3 rounded-2xl text-white font-nunito text-2xl font-bold shadow-lg hover:opacity-90 transition bg-[#FFBC57]"
           >
             Hablemos

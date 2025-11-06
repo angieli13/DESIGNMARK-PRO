@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import logoIcon from "../assets/images/Logo.png";
 import iconFacebook from "../assets/images/IconFacebook.png";
@@ -10,12 +10,49 @@ import Footer from "./Footer.jsx";
 const PackagesPage = () => {
   const navigate = useNavigate();
   const [selectedCount, setSelectedCount] = useState(0);
+  const [selectedServices, setSelectedServices] = useState([]);
 
-  
-  const handleCheckboxChange = (checked) => {
-    setSelectedCount((prev) => prev + (checked ? 1 : -1));
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    if (isLoggedIn !== "true") navigate("/login");
+  }, [navigate]);
+
+  // Manejar selección de servicios
+  const handleCheckboxChange = (pkgTitle, service, checked) => {
+    if (checked) {
+      setSelectedServices((prev) => [
+        ...prev,
+        { paquete: pkgTitle, servicio: service },
+      ]);
+      setSelectedCount((prev) => prev + 1);
+    } else {
+      setSelectedServices((prev) =>
+        prev.filter(
+          (item) => !(item.paquete === pkgTitle && item.servicio === service)
+        )
+      );
+      setSelectedCount((prev) => prev - 1);
+    }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userEmail");
+    localStorage.removeItem("selectedPackage");
+    navigate("/login");
+  };
+
+  // Guardar paquete seleccionado y redirigir
+  const handleSavePackage = () => {
+    if (selectedServices.length === 0) {
+      alert("Selecciona al menos un servicio antes de continuar.");
+      return;
+    }
+
+    localStorage.setItem("selectedPackage", JSON.stringify(selectedServices));
+    localStorage.setItem("visitSource", "packages");
+    navigate("/calendly");
+  };
   // Datos de las tarjetas
   const packages = [
     {
@@ -38,8 +75,8 @@ const PackagesPage = () => {
         "Patrones de marca → Texturas y formas visuales que te identifican.",
         "Recursos gráficos → Íconos, ilustraciones y elementos visuales.",
         "Estrategia de marca → Propósito, valores y diferenciación.",
-        "Personalidad y tono de comunicación → Cómo habla tu marca."
-      ]
+        "Personalidad y tono de comunicación → Cómo habla tu marca.",
+      ],
     },
     {
       title: "Página Web",
@@ -57,13 +94,14 @@ const PackagesPage = () => {
         "Mantenimiento mensual → Actualizaciones y soporte constante.",
         "Integración con WhatsApp / RRSS → Contacto directo desde la web.",
         "Formularios personalizados → Para cotizaciones, contacto o encuestas.",
-        "Chat en vivo → Comunicación instantánea con visitantes."
-      ]
+        "Chat en vivo → Comunicación instantánea con visitantes.",
+      ],
     },
     {
       title: "Redes Sociales (Social Media)",
       color: "#FFBC57",
-      description: "Haz crecer tu presencia digital con contenido y estrategia en redes.",
+      description:
+        "Haz crecer tu presencia digital con contenido y estrategia en redes.",
       items: [
         "Estrategia de redes → Qué, cómo y cuándo publicar.",
         "Diseño de perfiles → Imagen de perfil, portada y biografía optimizada.",
@@ -75,29 +113,33 @@ const PackagesPage = () => {
         "Publicidad en redes (Meta Ads) → Campañas en Facebook e Instagram.",
         "Informe de métricas → Análisis mensual del rendimiento.",
         "Reels / Videos cortos → Contenido en formato vertical para TikTok e Instagram.",
-        "Concursos o promociones"
-      ]
-    }
+        "Concursos o promociones",
+      ],
+    },
   ];
 
   return (
     <div className="bg-[#0046A0] min-h-screen">
-      
-      <header className="flex justify-between items-start px-8 md:px-16 pt-6 pb-4 w-full">
-  <img
-    src={logoIcon}
-    alt="Logo"
-    className="w-64 md:w-80 h-auto cursor-pointer"
-    onClick={() => navigate("/")}
-  />
-  <div className="flex items-start mt-2 gap-4 md:gap-6">
-    <img src={iconFacebook} alt="Facebook" className="w-10 h-10 md:w-12 md:h-12" />
-    <img src={iconInstagram} alt="Instagram" className="w-10 h-10 md:w-12 md:h-12" />
-    <img src={iconLinkedin} alt="LinkedIn" className="w-10 h-10 md:w-12 md:h-12" />
-  </div>
-</header>
+      <header className="flex justify-between items-center px-8 md:px-16 pt-6 pb-4 w-full">
+        <img
+          src={logoIcon}
+          alt="Logo"
+          className="w-64 md:w-80 h-auto cursor-pointer"
+          onClick={() => navigate("/")}
+        />
+        <div className="flex items-center gap-4 md:gap-6">
+          <button
+            onClick={handleLogout}
+            className="bg-[#FFBC57] text-[#0046A0] font-bold px-4 py-2 rounded-lg hover:opacity-90"
+          >
+            Cerrar sesión
+          </button>
+          <img src={iconFacebook} alt="Facebook" className="w-10 h-10" />
+          <img src={iconInstagram} alt="Instagram" className="w-10 h-10" />
+          <img src={iconLinkedin} alt="LinkedIn" className="w-10 h-10" />
+        </div>
+      </header>
 
-      
       <main className="mt-12 max-w-7xl mx-auto grid md:grid-cols-3 gap-8 px-4">
         {packages.map((pkg, index) => (
           <div
@@ -119,7 +161,9 @@ const PackagesPage = () => {
                   <input
                     type="checkbox"
                     className="mt-1"
-                    onChange={(e) => handleCheckboxChange(e.target.checked)}
+                    onChange={(e) =>
+                      handleCheckboxChange(pkg.title, item, e.target.checked)
+                    }
                   />
                   <span className="text-white font-nunito">{item}</span>
                 </li>
@@ -129,7 +173,17 @@ const PackagesPage = () => {
         ))}
       </main>
 
-      
+      <div className="mt-12 flex flex-col items-center justify-center gap-6 px-4">
+        <p className="text-white font-nunito text-xl text-center">
+          Servicios seleccionados: <strong>{selectedCount}</strong>
+        </p>
+        <button
+          onClick={handleSavePackage}
+          className="bg-[#FFBC57] text-[#0046A0] font-bold px-8 py-3 rounded-lg hover:opacity-90"
+        >
+          Guardar paquete y agendar cita
+        </button>
+      </div>
       <div className="mt-12 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-6 px-4">
         <p className="text-white font-nunito text-xl text-center">
           Inversión en tu futuro digital
@@ -140,29 +194,28 @@ const PackagesPage = () => {
       </div>
 
       <section
-  className="w-full mt-16 py-16 px-8 flex flex-col items-center"
-  style={{
-    backgroundImage: `url(${Patrones2})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-  }}
->
-  <div className="text-center max-w-3xl">
-    <h2 className="text-5xl md:text-6xl font-f37 text-[#FFBC57] mb-6">
-      Extras
-    </h2>
-    <div className="text-white font-nunito text-lg md:text-xl text-justify space-y-4">
-      <p>📂 Espacio Extra: Para que tu web crezca sin límites.</p>
-      <p>⚡ Funcionalidades Premium: Desde reservas online hasta integraciones que potenciarán tu sitio.</p>
-      <p>🛡️ Seguridad Reforzada: Protección anti-hackers nivel.</p>
-    </div>
-  </div>
-</section>
+        className="w-full mt-16 py-16 px-8 flex flex-col items-center"
+        style={{
+          backgroundImage: `url(${Patrones2})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="text-center max-w-3xl">
+          <h2 className="text-5xl md:text-6xl font-f37 text-[#FFBC57] mb-6">
+            Extras
+          </h2>
+          <div className="text-white font-nunito text-lg md:text-xl text-justify space-y-4">
+            <p>📂 Espacio Extra: Para que tu web crezca sin límites.</p>
+            <p>
+              ⚡ Funcionalidades Premium: Desde reservas online hasta
+              integraciones que potenciarán tu sitio.
+            </p>
+            <p>🛡️ Seguridad Reforzada: Protección anti-hackers nivel.</p>
+          </div>
+        </div>
+      </section>
 
-
-
-
-      
       <Footer />
     </div>
   );
