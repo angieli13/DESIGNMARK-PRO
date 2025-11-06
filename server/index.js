@@ -62,6 +62,43 @@ app.post("/api/login", (req, res) => {
     res.json({ message: "Login exitoso", user });
   });
 });
+// Guardar paquete seleccionado
+app.post("/api/save-package", (req, res) => {
+  const { user_id, nombre_paquete, servicios } = req.body;
+
+  if (!user_id || !nombre_paquete || !servicios) {
+    return res.status(400).json({ error: "Faltan datos para guardar el paquete" });
+  }
+
+  const sql = `INSERT INTO paquetes (user_id, nombre_paquete, servicio) VALUES (?, ?, ?)`;
+  db.query(sql, [user_id, nombre_paquete, JSON.stringify(servicios)], (err, result) => {
+    if (err) {
+      console.error("❌ Error al guardar paquete:", err);
+      return res.status(500).json({ error: "Error al guardar el paquete" });
+    }
+    res.json({ message: "✅ Paquete guardado correctamente", id: result.insertId });
+  });
+});
+
+// Obtener paquetes de un usuario
+app.get("/api/get-packages/:user_id", (req, res) => {
+  const { user_id } = req.params;
+  db.query("SELECT * FROM paquetes WHERE user_id = ?", [user_id], (err, results) => {
+    if (err) return res.status(500).json({ error: "Error al obtener paquetes" });
+    res.json(results);
+  });
+});
+
+// Obtener usuario por correo
+app.get("/api/get-user/:correo", (req, res) => {
+  const { correo } = req.params;
+  db.query("SELECT id, CORREO FROM registro WHERE CORREO = ?", [correo], (err, results) => {
+    if (err) return res.status(500).json({ error: "Error al buscar usuario" });
+    if (results.length === 0) return res.status(404).json({ error: "Usuario no encontrado" });
+    res.json(results[0]);
+  });
+});
+
 
 // Iniciar servidor
 const PORT = process.env.PORT || 5000;
