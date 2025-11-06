@@ -6,7 +6,6 @@ import iconInstagram from "../assets/images/IconInstagram.png";
 import iconLinkedin from "../assets/images/IconLinkedin.png";
 import Footer from "./Footer.jsx";
 
-// ICONOS
 import { LuLogIn } from "react-icons/lu";
 import {
   MdPersonAddAlt1,
@@ -27,6 +26,7 @@ const LoginPage = () => {
   const [activeTab, setActiveTab] = useState("login");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [acceptPolicy, setAcceptPolicy] = useState(false);
 
   const [formData, setFormData] = useState({
     NOMBRES: "",
@@ -42,18 +42,72 @@ const LoginPage = () => {
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleLogin = () => {
-    if (formData.CORREO && formData.CONTRASEÑA) {
+  // ✅ LOGIN conectado a backend
+  const handleLogin = async () => {
+    if (!formData.CORREO || !formData.CONTRASEÑA) {
+      alert("Por favor ingresa tu correo y contraseña.");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          CORREO: formData.CORREO,
+          CONTRASEÑA: formData.CONTRASEÑA,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.error || "Error al iniciar sesión");
+        return;
+      }
+
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("userEmail", formData.CORREO);
+      alert("Inicio de sesión exitoso 🎉");
       navigate("/packages");
-    } else {
-      alert("Ingresa tu correo y contraseña");
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error);
+      alert("Error del servidor. Verifica la conexión.");
     }
   };
 
-  const handleRegister = () => {
-    console.log("Datos enviados:", formData);
-    alert("Registro enviado");
-    setActiveTab("login");
+  // ✅ REGISTRO conectado al backend
+  const handleRegister = async () => {
+    if (!acceptPolicy) {
+      alert("Debes aceptar las políticas de manejo de datos.");
+      return;
+    }
+
+    if (formData.CONTRASEÑA !== formData.CONFIRMAR_CONTRASEÑA) {
+      alert("Las contraseñas no coinciden.");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.error || "Error al registrar el usuario.");
+        return;
+      }
+
+      alert("Registro exitoso ✅");
+      setActiveTab("login");
+    } catch (error) {
+      console.error("Error al registrar:", error);
+      alert("Error del servidor. Verifica la conexión.");
+    }
   };
 
   return (
@@ -128,7 +182,7 @@ const LoginPage = () => {
                   placeholder="Ingresa tu correo"
                   value={formData.CORREO}
                   onChange={handleChange}
-                  className="flex-1 py-2 outline-none bg-white text-[#0046A0] placeholder-[#d1d6df] font-['Nunito Sans']"
+                  className="flex-1 py-2 outline-none bg-white text-[#0046A0]"
                 />
               </div>
 
@@ -143,7 +197,7 @@ const LoginPage = () => {
                   placeholder="Ingresa tu contraseña"
                   value={formData.CONTRASEÑA}
                   onChange={handleChange}
-                  className="flex-1 py-2 outline-none bg-white text-[#0046A0] placeholder-[#d1d6df] font-['Nunito Sans']"
+                  className="flex-1 py-2 outline-none bg-white text-[#0046A0]"
                 />
                 <button type="button" onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? (
@@ -156,7 +210,7 @@ const LoginPage = () => {
 
               <button
                 onClick={handleLogin}
-                className="w-full bg-[#FFBC57] text-white text-lg py-3 rounded-xl font-bold font-['F37 Ginger'] hover:opacity-90"
+                className="w-full bg-[#FFBC57] text-white text-lg py-3 rounded-xl font-bold hover:opacity-90"
               >
                 Iniciar Sesión
               </button>
@@ -165,7 +219,7 @@ const LoginPage = () => {
 
           {/* REGISTER */}
           {activeTab === "register" && (
-            <>
+                        <>
               <p className="text-center text-[#0046A0] font-semibold mb-6 font-['Nunito Sans']">
                 Ingresa los siguientes datos para crear tu cuenta
               </p>
@@ -337,11 +391,14 @@ const LoginPage = () => {
                 </ul>
               </div>
 
+
               {/* Checkbox políticas */}
               <div className="flex items-center mb-6">
                 <input
                   id="politicas"
                   type="checkbox"
+                  checked={acceptPolicy}
+                  onChange={() => setAcceptPolicy(!acceptPolicy)}
                   className="
                     w-5 h-5 mr-2 appearance-none border-2 border-[#FFBC57]
                     rounded bg-white relative cursor-pointer
@@ -361,7 +418,7 @@ const LoginPage = () => {
 
               <button
                 onClick={handleRegister}
-                className="w-full bg-[#0046A0] text-white text-lg py-3 rounded-xl font-bold font-['F37 Ginger'] hover:opacity-90"
+                className="w-full bg-[#0046A0] text-white text-lg py-3 rounded-xl font-bold hover:opacity-90"
               >
                 Crear cuenta
               </button>
