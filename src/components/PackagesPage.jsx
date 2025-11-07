@@ -43,16 +43,55 @@ const PackagesPage = () => {
   };
 
   // Guardar paquete seleccionado y redirigir
-  const handleSavePackage = () => {
-    if (selectedServices.length === 0) {
-      alert("Selecciona al menos un servicio antes de continuar.");
+  const handleSavePackage = async () => {
+  if (selectedServices.length === 0) {
+    alert("Selecciona al menos un servicio antes de continuar.");
+    return;
+  }
+
+  const userEmail = localStorage.getItem("userEmail");
+  if (!userEmail) {
+    alert("Debes iniciar sesión para guardar tu paquete.");
+    navigate("/login");
+    return;
+  }
+
+  try {
+    // 1️⃣ Obtener el ID del usuario desde el backend
+    const userResponse = await fetch(`http://localhost:5000/api/get-user/${userEmail}`);
+    const user = await userResponse.json();
+
+    if (!user?.id) {
+      alert("Error al identificar usuario.");
       return;
     }
 
-    localStorage.setItem("selectedPackage", JSON.stringify(selectedServices));
-    localStorage.setItem("visitSource", "packages");
-    navigate("/calendly");
-  };
+    // 2️⃣ Guardar el paquete en la base de datos
+    const response = await fetch("http://localhost:5000/api/save-package", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        user_id: user.id,
+        nombre_paquete: "Paquete personalizado",
+        servicios: selectedServices,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      localStorage.setItem("selectedPackage", JSON.stringify(selectedServices));
+      localStorage.setItem("visitSource", "packages");
+      navigate("/calendly");
+    } else {
+      alert(data.error || "Error al guardar el paquete");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Error de conexión con el servidor");
+  }
+};
+
   // Datos de las tarjetas
   const packages = [
     {
