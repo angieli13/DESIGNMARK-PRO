@@ -89,6 +89,7 @@ app.get("/api/get-packages/:user_id", (req, res) => {
   });
 });
 
+
 // Obtener usuario por correo
 app.get("/api/get-user/:correo", (req, res) => {
   const { correo } = req.params;
@@ -98,6 +99,7 @@ app.get("/api/get-user/:correo", (req, res) => {
     res.json(results[0]);
   });
 });
+
 
 
 // Iniciar servidor
