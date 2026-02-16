@@ -19,20 +19,23 @@ app.get("/", (req, res) => {
 // Registro
 app.post("/api/register", (req, res) => {
   const {
-    NOMBRES,
-    APELLIDOS,
-    CORREO,
-    EMPRESA,
-    CELULAR,
-    CONTRASEÑA,
-    FECHA_NACIMIENTO,
-  } = req.body;
+  NOMBRES,
+  APELLIDOS,
+  CORREO,
+  EMPRESA,
+  CELULAR,
+  CONTRASENA,
+  FECHA_NACIMIENTO,
+} = req.body;
 
-  const hashedPassword = bcrypt.hashSync(CONTRASEÑA, 8);
+const hashedPassword = bcrypt.hashSync(CONTRASENA, 8);
 
-  const sql = `INSERT INTO registro 
-    (NOMBRES, APELLIDOS, CORREO, EMPRESA, CELULAR, CONTRASEÑA, FECHA_NACIMIENTO) 
-    VALUES (?, ?, ?, ?, ?, ?, ?)`;
+const sql = `
+  INSERT INTO registro
+  (NOMBRES, APELLIDOS, CORREO, EMPRESA, CELULAR, CONTRASENA, FECHA_NACIMIENTO)
+  VALUES (?, ?, ?, ?, ?, ?, ?)
+`;
+
 
   db.query(
     sql,
@@ -46,6 +49,46 @@ app.post("/api/register", (req, res) => {
     }
   );
 });
+// Actualizar usuario
+app.put("/api/users/:id", (req, res) => {
+  const { id } = req.params;
+  const { NOMBRES, APELLIDOS, EMPRESA, CELULAR } = req.body;
+
+  if (!NOMBRES || !APELLIDOS) {
+    return res.status(400).json({ error: "Nombres y apellidos son obligatorios" });
+  }
+
+  const sql = `
+    UPDATE registro 
+    SET NOMBRES = ?, APELLIDOS = ?, EMPRESA = ?, CELULAR = ?
+    WHERE ID = ?
+  `;
+
+  db.query(sql, [NOMBRES, APELLIDOS, EMPRESA, CELULAR, id], (err, result) => {
+    if (err) return res.status(500).json({ error: "Error al actualizar usuario" });
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+
+    res.status(200).json({ message: "Usuario actualizado correctamente" });
+  });
+});
+// Eliminar usuario
+app.delete("/api/users/:id", (req, res) => {
+  const { id } = req.params;
+
+  db.query("DELETE FROM registro WHERE ID = ?", [id], (err, result) => {
+    if (err) return res.status(500).json({ error: "Error al eliminar usuario" });
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+
+    res.status(200).json({ message: "Usuario eliminado correctamente" });
+  });
+});
+
 
 // Login
 app.post("/api/login", (req, res) => {
