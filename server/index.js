@@ -19,20 +19,23 @@ app.get("/", (req, res) => {
 // Registro
 app.post("/api/register", (req, res) => {
   const {
-    NOMBRES,
-    APELLIDOS,
-    CORREO,
-    EMPRESA,
-    CELULAR,
-    CONTRASEÑA,
-    FECHA_NACIMIENTO,
-  } = req.body;
+  NOMBRES,
+  APELLIDOS,
+  CORREO,
+  EMPRESA,
+  CELULAR,
+  CONTRASENA,
+  FECHA_NACIMIENTO,
+} = req.body;
 
-  const hashedPassword = bcrypt.hashSync(CONTRASEÑA, 8);
+const hashedPassword = bcrypt.hashSync(CONTRASENA, 8);
 
-  const sql = `INSERT INTO registro 
-    (NOMBRES, APELLIDOS, CORREO, EMPRESA, CELULAR, CONTRASEÑA, FECHA_NACIMIENTO) 
-    VALUES (?, ?, ?, ?, ?, ?, ?)`;
+const sql = `
+  INSERT INTO registro
+  (NOMBRES, APELLIDOS, CORREO, EMPRESA, CELULAR, CONTRASENA, FECHA_NACIMIENTO)
+  VALUES (?, ?, ?, ?, ?, ?, ?)
+`;
+
 
   db.query(
     sql,
@@ -46,22 +49,92 @@ app.post("/api/register", (req, res) => {
     }
   );
 });
+// Actualizar usuario
+app.put("/api/users/:id", (req, res) => {
+  const { id } = req.params;
+  const { NOMBRES, APELLIDOS, EMPRESA, CELULAR } = req.body;
+
+  if (!NOMBRES || !APELLIDOS) {
+    return res.status(400).json({ error: "Nombres y apellidos son obligatorios" });
+  }
+
+  const sql = `
+    UPDATE registro 
+    SET NOMBRES = ?, APELLIDOS = ?, EMPRESA = ?, CELULAR = ?
+    WHERE ID = ?
+  `;
+
+  db.query(sql, [NOMBRES, APELLIDOS, EMPRESA, CELULAR, id], (err, result) => {
+    if (err) return res.status(500).json({ error: "Error al actualizar usuario" });
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+
+    res.status(200).json({ message: "Usuario actualizado correctamente" });
+  });
+});
+// Eliminar usuario
+app.delete("/api/users/:id", (req, res) => {
+  const { id } = req.params;
+
+  db.query("DELETE FROM registro WHERE ID = ?", [id], (err, result) => {
+    if (err) return res.status(500).json({ error: "Error al eliminar usuario" });
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "Usuario no encontrado" });
+    }
+
+    res.status(200).json({ message: "Usuario eliminado correctamente" });
+  });
+});
+
 
 // Login
 app.post("/api/login", (req, res) => {
-  const { CORREO, CONTRASEÑA } = req.body;
+  const { CORREO, CONTRASENA } = req.body;
 
-  db.query("SELECT * FROM registro WHERE CORREO = ?", [CORREO], (err, results) => {
-    if (err) return res.status(500).json({ error: "Error en servidor" });
-    if (results.length === 0) return res.status(401).json({ error: "Usuario no encontrado" });
+  if (!CORREO || !CONTRASENA) {
+    return res.status(400).json({
+      error: "Correo y contraseña son obligatorios"
+    });
+  }
 
-    const user = results[0];
-    const valid = bcrypt.compareSync(CONTRASEÑA, user.CONTRASEÑA);
-    if (!valid) return res.status(401).json({ error: "Contraseña incorrecta" });
+  db.query(
+    "SELECT * FROM registro WHERE CORREO = ?",
+    [CORREO],
+    (err, results) => {
+      if (err) {
+        return res.status(500).json({ error: "Error en servidor" });
+      }
 
-    res.json({ message: "Login exitoso", user });
-  });
+      if (results.length === 0) {
+        return res.status(404).json({ error: "Usuario no encontrado" });
+      }
+
+      const user = results[0];
+
+      const valid = bcrypt.compareSync(
+        CONTRASENA,
+        user.CONTRASENA
+      );
+
+      if (!valid) {
+        return res.status(401).json({ error: "Contraseña incorrecta" });
+      }
+
+      res.status(200).json({
+        message: "Login exitoso",
+        user: {
+          ID: user.ID,
+          CORREO: user.CORREO,
+          NOMBRES: user.NOMBRES
+        }
+      });
+    }
+  );
 });
+
 // Guardar paquete seleccionado
 app.post("/api/save-package", (req, res) => {
   const { user_id, nombre_paquete, servicios } = req.body;
@@ -100,7 +173,18 @@ app.get("/api/get-user/:correo", (req, res) => {
   });
 });
 
+// Obtener todos los usuarios
+app.get("/api/users", (req, res) => {
+  const sql = "SELECT ID, NOMBRES, APELLIDOS, CORREO, EMPRESA, CELULAR, FECHA_NACIMIENTO FROM registro";
 
+  db.query(sql, (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: "Error al obtener usuarios" });
+    }
+
+    res.json(results);
+  });
+});
 
 // Iniciar servidor
 const PORT = process.env.PORT || 5000;

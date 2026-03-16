@@ -5,18 +5,20 @@ import logoIcon from "../assets/images/Logo.png";
 import iconFacebook from "../assets/images/IconFacebook.png";
 import iconInstagram from "../assets/images/IconInstagram.png";
 import iconLinkedin from "../assets/images/IconLinkedin.png";
-import whatsappIcon from "../assets/images/whatsapp-icon.png"; // Importa tu icono aquí
+import whatsappIcon from "../assets/images/whatsapp-icon.png";
 
 const Home = () => {
   const navigate = useNavigate();
 
   return (
     <div
-      className="min-h-[calc(100vh+100px)] bg-cover bg-center bg-no-repeat flex flex-col"
+      className="min-h-screen bg-cover bg-center bg-no-repeat flex flex-col"
       style={{ backgroundImage: `url(${ImagenBackgroundHome})` }}
     >
-      <header className="flex justify-between items-start px-8 md:px-16 pt-6 pb-4 w-full">
-        <img src={logoIcon} alt="Logo" className="w-64 md:w-80 h-auto" />
+      {/* HEADER */}
+      <header className="flex justify-between items-start px-6 md:px-14 pt-6 pb-4 w-full">
+        <img src={logoIcon} alt="Logo" className="w-52 md:w-72 h-auto" />
+
         <div className="flex items-start mt-2 gap-4 md:gap-6">
           <img
             src={iconFacebook}
@@ -36,21 +38,22 @@ const Home = () => {
         </div>
       </header>
 
-      <main className="flex flex-1 items-center justify-start px-8 md:px-24 w-full">
-        <div className="w-full md:w-1/2 space-y-8 text-left -mt-12 md:-mt-16">
+      {/* MAIN */}
+      <main className="flex flex-1 items-center justify-start px-6 md:px-20 w-full">
+        <div className="w-full md:w-1/2 space-y-8 text-left -mt-10 md:-mt-16">
           <h1 className="text-5xl md:text-7xl font-f37 font-bold leading-tight text-[#FFBC57]">
             Transforma tu Visión en una Marca Poderosa
           </h1>
 
           <p className="text-xl md:text-2xl text-white font-nunito">
             En DesignMark Pro, te ofrecemos una solución integral para
-            personalizar y organizar paquetes de servicios de diseño, desarrollo
-            web y publicidad en redes sociales.
+            personalizar y organizar paquetes de servicios de diseño,
+            desarrollo web y publicidad en redes sociales.
           </p>
 
           <button
             onClick={() => {
-              localStorage.removeItem("selectedPackage"); // limpia si existía
+              localStorage.removeItem("selectedPackage");
               localStorage.setItem("visitSource", "home");
               navigate("/calendly");
             }}
@@ -61,11 +64,12 @@ const Home = () => {
         </div>
       </main>
 
+      {/* WHATSAPP BUTTON */}
       <a
         href="https://wa.me/573001234567?text=Hola,%20quiero%20más%20información"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-8 right-8 bg-[#25D366] hover:bg-green-600 text-white rounded-full w-20 h-20 flex items-center justify-center shadow-lg z-50"
+        className="fixed bottom-6 right-6 bg-[#25D366] hover:bg-green-600 text-white rounded-full w-20 h-20 flex items-center justify-center shadow-lg z-50"
       >
         <img src={whatsappIcon} alt="WhatsApp" className="w-12 h-12" />
       </a>
