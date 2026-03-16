@@ -34,9 +34,10 @@ const LoginPage = () => {
     CORREO: "",
     EMPRESA: "",
     CELULAR: "",
-    FECHA_NACIMIENTO: "",
-    CONTRASEÑA: "",
-    CONFIRMAR_CONTRASEÑA: "",
+    CONTRASENA: "",
+    CONFIRMAR_CONTRASENA: "",
+    FECHA_NACIMIENTO: "",    
+    
   });
 
   const handleChange = (e) =>
@@ -44,7 +45,7 @@ const LoginPage = () => {
 
   // ✅ LOGIN conectado a backend
   const handleLogin = async () => {
-    if (!formData.CORREO || !formData.CONTRASEÑA) {
+    if (!formData.CORREO || !formData.CONTRASENA) {
       alert("Por favor ingresa tu correo y contraseña.");
       return;
     }
@@ -55,7 +56,7 @@ const LoginPage = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           CORREO: formData.CORREO,
-          CONTRASEÑA: formData.CONTRASEÑA,
+          CONTRASENA: formData.CONTRASENA,
         }),
       });
 
@@ -83,7 +84,7 @@ const LoginPage = () => {
       return;
     }
 
-    if (formData.CONTRASEÑA !== formData.CONFIRMAR_CONTRASEÑA) {
+    if (formData.CONTRASENA !== formData.CONFIRMAR_CONTRASENA) {
       alert("Las contraseñas no coinciden.");
       return;
     }
@@ -192,10 +193,10 @@ const LoginPage = () => {
               <div className="flex items-center border-2 border-[#FFBC57] rounded-lg px-3 mb-6 bg-white">
                 <RiLockPasswordLine className="text-[#FFBC57] text-xl mr-2" />
                 <input
-                  name="CONTRASEÑA"
+                  name="CONTRASENA"
                   type={showPassword ? "text" : "password"}
                   placeholder="Ingresa tu contraseña"
-                  value={formData.CONTRASEÑA}
+                  value={formData.CONTRASENA}
                   onChange={handleChange}
                   className="flex-1 py-2 outline-none bg-white text-[#0046A0]"
                 />
@@ -334,10 +335,10 @@ const LoginPage = () => {
               <div className="flex items-center border-2 border-[#FFBC57] rounded-lg px-3 mb-6 bg-white">
                 <RiLockPasswordLine className="text-[#FFBC57] text-xl mr-2" />
                 <input
-                  name="CONTRASEÑA"
+                  name="CONTRASENA"
                   type={showPassword ? "text" : "password"}
                   placeholder="Contraseña"
-                  value={formData.CONTRASEÑA}
+                  value={formData.CONTRASENA}
                   onChange={handleChange}
                   className="flex-1 py-2 outline-none bg-white text-[#0046A0] placeholder-[#d1d6df] font-['Nunito Sans']"
                 />
@@ -357,10 +358,10 @@ const LoginPage = () => {
               <div className="flex items-center border-2 border-[#FFBC57] rounded-lg px-3 mb-6 bg-white">
                 <FaCheckCircle className="text-[#FFBC57] text-xl mr-2" />
                 <input
-                  name="CONFIRMAR_CONTRASEÑA"
+                  name="CONFIRMAR_CONTRASENA"
                   type={showConfirmPassword ? "text" : "password"}
                   placeholder="Confirmar contraseña"
-                  value={formData.CONFIRMAR_CONTRASEÑA}
+                  value={formData.CONFIRMAR_CONTRASENA}
                   onChange={handleChange}
                   className="flex-1 py-2 outline-none bg-white text-[#0046A0] placeholder-[#d1d6df] font-['Nunito Sans']"
                 />

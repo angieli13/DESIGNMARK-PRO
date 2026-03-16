@@ -92,19 +92,49 @@ app.delete("/api/users/:id", (req, res) => {
 
 // Login
 app.post("/api/login", (req, res) => {
-  const { CORREO, CONTRASEÑA } = req.body;
+  const { CORREO, CONTRASENA } = req.body;
 
-  db.query("SELECT * FROM registro WHERE CORREO = ?", [CORREO], (err, results) => {
-    if (err) return res.status(500).json({ error: "Error en servidor" });
-    if (results.length === 0) return res.status(401).json({ error: "Usuario no encontrado" });
+  if (!CORREO || !CONTRASENA) {
+    return res.status(400).json({
+      error: "Correo y contraseña son obligatorios"
+    });
+  }
 
-    const user = results[0];
-    const valid = bcrypt.compareSync(CONTRASEÑA, user.CONTRASEÑA);
-    if (!valid) return res.status(401).json({ error: "Contraseña incorrecta" });
+  db.query(
+    "SELECT * FROM registro WHERE CORREO = ?",
+    [CORREO],
+    (err, results) => {
+      if (err) {
+        return res.status(500).json({ error: "Error en servidor" });
+      }
 
-    res.json({ message: "Login exitoso", user });
-  });
+      if (results.length === 0) {
+        return res.status(404).json({ error: "Usuario no encontrado" });
+      }
+
+      const user = results[0];
+
+      const valid = bcrypt.compareSync(
+        CONTRASENA,
+        user.CONTRASENA
+      );
+
+      if (!valid) {
+        return res.status(401).json({ error: "Contraseña incorrecta" });
+      }
+
+      res.status(200).json({
+        message: "Login exitoso",
+        user: {
+          ID: user.ID,
+          CORREO: user.CORREO,
+          NOMBRES: user.NOMBRES
+        }
+      });
+    }
+  );
 });
+
 // Guardar paquete seleccionado
 app.post("/api/save-package", (req, res) => {
   const { user_id, nombre_paquete, servicios } = req.body;
@@ -143,7 +173,18 @@ app.get("/api/get-user/:correo", (req, res) => {
   });
 });
 
+// Obtener todos los usuarios
+app.get("/api/users", (req, res) => {
+  const sql = "SELECT ID, NOMBRES, APELLIDOS, CORREO, EMPRESA, CELULAR, FECHA_NACIMIENTO FROM registro";
 
+  db.query(sql, (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: "Error al obtener usuarios" });
+    }
+
+    res.json(results);
+  });
+});
 
 // Iniciar servidor
 const PORT = process.env.PORT || 5000;

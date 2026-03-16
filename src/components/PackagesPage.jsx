@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-
 import logoIcon from "../assets/images/Logo.png";
 import iconFacebook from "../assets/images/IconFacebook.png";
 import iconInstagram from "../assets/images/IconInstagram.png";
