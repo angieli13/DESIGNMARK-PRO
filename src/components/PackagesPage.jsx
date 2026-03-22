@@ -7,6 +7,9 @@ import iconLinkedin from "../assets/images/IconLinkedin.png";
 import Patrones2 from "../assets/images/Patrones2.png";
 import Footer from "./Footer.jsx";
 
+// URL del backend
+const API_URL = "https://designmark-pro.onrender.com";
+
 const PackagesPage = () => {
   const navigate = useNavigate();
 
@@ -53,7 +56,7 @@ const PackagesPage = () => {
 
     try {
       const userResponse = await fetch(
-        `http://localhost:5000/api/get-user/${userEmail}`
+        `${API_URL}/api/get-user/${userEmail}`
       );
       const user = await userResponse.json();
 
@@ -62,7 +65,7 @@ const PackagesPage = () => {
         return;
       }
 
-      const response = await fetch("http://localhost:5000/api/save-package", {
+      const response = await fetch(`${API_URL}/api/save-package`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
