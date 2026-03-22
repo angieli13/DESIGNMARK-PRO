@@ -8,7 +8,12 @@ import db from "./database.js";
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: [
+    "https://designmark.netlify.app",
+    "https://designmark-pro.onrender.com"
+  ]
+}));
 app.use(bodyParser.json());
 
 // Ruta de prueba
